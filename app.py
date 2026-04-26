@@ -18,8 +18,8 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Extract data from form
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
+    float_features = [float(x) for x in request.form.values()]
+    final_features = [np.array(float_features)]
     
     # Make prediction
     prediction = model.predict(final_features)

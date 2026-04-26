@@ -17,15 +17,18 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Extract data from form
-    float_features = [float(x) for x in request.form.values()]
-    final_features = [np.array(float_features)]
-    
-    # Make prediction
-    prediction = model.predict(final_features)
-    output = 'Placed' if prediction[0] == 1 else 'Not Placed'
+    try:
+        # Extract data from form
+        float_features = [float(x) for x in request.form.values()]
+        final_features = [np.array(float_features)]
+        
+        # Make prediction
+        prediction = model.predict(final_features)
+        output = 'Placed' if prediction[0] == 1 else 'Not Placed'
 
-    return render_template('index.html', prediction_text='Prediction: {}'.format(output))
+        return render_template('index.html', prediction_text='Prediction: {}'.format(output))
+    except Exception as e:
+        return render_template('index.html', prediction_text='Error: Invalid input provided. Please check your entries.')
 
 if __name__ == "__main__":
     app.run(debug=True)

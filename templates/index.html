@@ -2,64 +2,127 @@
 <html>
 <head>
     <title>Student Placement Prediction</title>
+
+    <!-- IMPORTANT for mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 50px;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f9;
         }
+
         .form-container {
+            width: 100%;
             max-width: 500px;
             margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
         .form-container input {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px 0;
-            display: inline-block;
+            padding: 12px;
+            margin: 8px 0 18px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+            border-radius: 6px;
+            font-size: 14px;
         }
+
         .form-container input[type="submit"] {
             background-color: #4CAF50;
             color: white;
             border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
         }
+
         .form-container input[type="submit"]:hover {
             background-color: #45a049;
         }
+
         .result {
-            font-size: 1.5em;
+            font-size: 1.4em;
             color: #4CAF50;
             text-align: center;
             margin-top: 20px;
         }
+
+        /* 🔹 Mobile specific styling */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .form-container input {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* 🔹 Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .form-container {
+                max-width: 90%;
+            }
+        }
+
+        /* 🔹 Large screens */
+        @media (min-width: 1024px) {
+            .form-container {
+                max-width: 450px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <h2>Student Placement Prediction</h2>
+
         <form action="/predict" method="post">
-            <label for="IQ">IQ:</label>
+            <label>IQ:</label>
             <input type="number" name="IQ" required>
-            
-            <label for="CGPA">CGPA:</label>
+
+            <label>CGPA:</label>
             <input type="number" step="0.01" name="CGPA" required>
-            
-            <label for="10th_Marks">10th Marks:</label>
+
+            <label>10th Marks:</label>
             <input type="number" name="10th_Marks" required>
-            
-            <label for="12th_Marks">12th Marks:</label>
+
+            <label>12th Marks:</label>
             <input type="number" name="12th_Marks" required>
-            
-            <label for="Communication_Skills">Communication Skills:</label>
+
+            <label>Communication Skills:</label>
             <input type="number" step="0.01" name="Communication_Skills" required>
-            
+
             <input type="submit" value="Predict">
         </form>
+
         {% if prediction_text %}
         <div class="result">{{ prediction_text }}</div>
         {% endif %}
